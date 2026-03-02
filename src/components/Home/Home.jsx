@@ -18,7 +18,7 @@ const Home = () => {
             a passionate Web Developer specializing in building beautiful, interactive user interfaces with React.
           </p>
           <div className="flex gap-4">
-            <button className="btn btn-primary">My Projects</button>
+            <button className="btn btn-primary" href='#projects'>My Projects</button>
             <button className="btn btn-outline btn-secondary">My CV</button>
           </div>
         </div>
