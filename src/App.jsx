@@ -7,6 +7,7 @@ import Contact from "./components/Contact/Contact";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   useEffect(() => {
@@ -31,6 +32,7 @@ function App() {
       <section id="contact">
         <Contact />
       </section>
+      <section><Footer></Footer></section>
     </>
   );
 }

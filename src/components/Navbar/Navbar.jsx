@@ -1,5 +1,6 @@
 import React from "react";
 import github from "../../assets/github-logo-png_seeklogo-304612.png";
+import me from "../../assets/AYR.png"
 const Navbar = () => {
   return (
     <div>
@@ -47,7 +48,7 @@ const Navbar = () => {
             className="text-xl hover:text-purple-700 font-bold flex items-center gap-2"
           >
             {" "}
-            {/* <img className="h-10 ml-4" src={logo} alt="" /> */}
+            <img className="h-15 ml-4" src={me} alt="" />
             
           </a>
         </div>

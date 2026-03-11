@@ -1,12 +1,12 @@
 import React from "react";
-
+import react from "../../assets/react.svg"
 const Projects = () => {
   const projectsData = [
     {
       id: 1,
       title: "ProChallenger",
       description:
-        "A robust Full-Stack Web Application built with the MERN stack (React, Node.js, and MongoDB). It features a secure Stripe payment gateway and a comprehensive data management system. The app includes role-based dashboards tailored for Admins, Sellers, and Customers to ensure a seamless user experience.",
+        "A robust Full-Stack Web Application built with the MERN stack (React, Node.js, and MongoDB).",
       image: "https://via.placeholder.com/400x225",
       liveLink: "https://ornate-horse-0239d6.netlify.app/",
       githubLink: "https://github.com/AhmetChatgami/proChallenger.git",
@@ -23,7 +23,7 @@ const Projects = () => {
       id: 2,
       title: "Home Hero",
       description:
-        "A comprehensive Service Provider Web Application built with a focus on both Frontend and Backend. Users can seamlessly browse and book services, as well as contribute by adding their own. The app features a full CRUD system, allowing users to efficiently manage, update, and track their service requests in real-time.",
+        "A comprehensive Service Provider Web Application built with a focus on both Frontend and Backend.",
       image: "",
       liveLink: "https://voluble-narwhal-c287c9.netlify.app/",
       githubLink: "https://github.com/AhmetChatgami/homeHero.git",
@@ -40,7 +40,7 @@ const Projects = () => {
       id: 3,
       title: "Toy Tophia",
       description:
-        "A responsive App Directory Web Application built with React. This project features a curated list of apps where users can explore detailed descriptions, check ratings, and simulate installing/uninstalling apps. It includes a real-time search functionality for quick discovery. For styling, I used Tailwind CSS and DaisyUI, while React Router handles seamless navigation. To enhance user experience, React Toastify and SweetAlert are integrated for interactive notifications and warnings. The data is dynamically managed using a custom JSON structure.",
+        " This project features a curated list of apps where users can explore detailed descriptions, check ratings, and simulate installing/uninstalling apps. It includes a real-time search functionality for quick discovery.",
       image: "https://via.placeholder.com/400x225",
       liveLink: "https://zesty-hero-app-ab6a38.netlify.app/",
       githubLink: "https://github.com/AhmetChatgami/assignment-8.git",
@@ -87,6 +87,7 @@ const Projects = () => {
                 {project.tech.map((t, index) => (
                   <div
                     key={index}
+                    img={react}
                     className="badge badge-outline text-xs transition-colors duration-300 hover:badge-secondary"
                   >
                     {t}
