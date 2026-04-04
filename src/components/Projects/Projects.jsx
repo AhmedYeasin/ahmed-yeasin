@@ -1,5 +1,5 @@
 import React from "react";
-// ইমপোর্টগুলো আগের মতোই থাকবে
+
 import react from "../../assets/react.svg";
 import prochallenger from "../../assets/prochallenger.jpg";
 import homeHero from "../../assets/homeHero.jpg";
@@ -13,7 +13,6 @@ import firebase from "../../assets/firebase.png";
 import mongo from "../../assets/mongo.png";
 import express from "../../assets/express.png";
 
-// আইকনস
 import { FaGithub } from "react-icons/fa6";
 import { FaArrowCircleRight } from "react-icons/fa";
 
@@ -118,7 +117,7 @@ const Projects = () => {
                         src={tech.icon} 
                         className={techIconStyle} 
                         alt={tech.name} 
-                        title={tech.name} // হোভার করলে নাম দেখাবে
+                        title={tech.name}
                       />
                     ))}
                   </div>
