@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FaDownload } from "react-icons/fa";
 import { FaArrowDown } from "react-icons/fa6";
 import profile from "../../assets/ahmed.jpeg.jpg";
-import cvFile from "../../../public/Resume Template.pdf";
+import cvFile from "../../../public/Ahmed Yeasin.pdf";
 
 const roles = ["Frontend Focused-Web Developer", "React.js Developer", "JavaScript Enthusiast", "Next.js Learner"];
 
@@ -97,7 +97,7 @@ const Home = () => {
                 View Projects
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </a>
-              <a href={cvFile} download="Ahmed_Yeasin_CV.pdf"
+              <a href={cvFile} download="Ahmed_Yeasin.pdf"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-bold text-white rounded-xl border transition-all duration-300 hover:scale-105 active:scale-95"
                 style={{ borderColor: "rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)" }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(124,58,237,0.5)"; e.currentTarget.style.background = "rgba(124,58,237,0.08)"; }}
