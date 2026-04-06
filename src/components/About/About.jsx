@@ -1,89 +1,119 @@
-import React from "react";
-// ইমপোর্টগুলো চেক করে নিও
-import reactImg from "../../assets/react.svg";
-import htmlLogo from "../../assets/HTML5_logo_and_wordmark.svg.png";
-import css from '../../assets/css3.png';
-import javascript from "../../assets/javascript.png";
-import tailwind from "../../assets/tailwind.png";
-import daysi from "../../assets/daysi.jpg";
-import node from "../../assets/node.png";
-import firebase from "../../assets/firebase.png";
-import mongo from "../../assets/mongo.png";
-import git from "../../assets/git.png";
-import vs from "../../assets/vs.png";
-import github from "../../assets/github-logo-png_seeklogo-304612.png";
-import vercel from "../../assets/vercel.svg";
-import express from "../../assets/express.png";
+import React, { useRef, useState, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
+import SectionTitle from "../SectionTitle/SectionTitle";
+import profile from "../../assets/ahmed.jpeg.jpg";
 
-const About = () => {
-  const techStacks = [
-    {
-      category: "Frontend",
-      skills: [
-        { name: "HTML5", icon: htmlLogo },
-        { name: "CSS3", icon: css },
-        { name: "Tailwind", icon: tailwind },
-        { name: "React", icon: reactImg },
-        { name: "JavaScript", icon: javascript },
-      ],
-    },
-    {
-      category: "Backend",
-      skills: [
-        { name: "Node.js", icon: node },
-        { name: "Express.js", icon: express },
-        { name: "MongoDB", icon: mongo },
-        { name: "Firebase", icon: firebase },
-      ],
-    },
-    {
-      category: "Tools & Others",
-      skills: [
-        { name: "Git", icon: git },
-        { name: "VS Code", icon: vs },
-        { name: "GitHub", icon: github },
-        { name: "Vercel", icon: vercel },
-      ],
-    },
-  ];
+const stats = [
+  { value: 3, label: "Projects Built", suffix: "+" },
+  { value: 1, label: "Year Learning", suffix: "+" },
+  { value: 8, label: "Technologies", suffix: "+" },
+];
+
+const Counter = ({ value, suffix }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!isInView) return;
+    let current = 0;
+    const step = Math.ceil(1500 / value);
+    const timer = setInterval(() => {
+      current += 1;
+      setCount(current);
+      if (current >= value) clearInterval(timer);
+    }, step);
+    return () => clearInterval(timer);
+  }, [isInView, value]);
 
   return (
-    <section id="about" className="py-20 bg-base-100">
-      <div className="container mx-auto px-5">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold border-b-4 border-primary inline-block pb-2">
-            About Me
-          </h2>
-        </div>
+    <div ref={ref} className="text-4xl font-extrabold gradient-text">{count}{suffix}</div>
+  );
+};
 
-        {/* Who I am Section */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h3 className="text-2xl font-semibold text-secondary mb-4">Who I am?</h3>
-          <p className="text-lg leading-relaxed text-base-content/80">
-            I am an aspiring Web Developer specializing in building modern web applications. With a primary focus on Frontend Development (React.js), I bridge the gap between design and functionality. Having basic knowledge of the MERN stack, I am now expanding my expertise into Next.js and advanced backend concepts.
-          </p>
-        </div>
+const tags = ["React.js", "Next.js", "Node.js", "MongoDB", "Tailwind CSS", "Firebase", "Express.js", "Git"];
 
-        {/* Tech Stacks */}
-        <h2 className="text-3xl font-bold text-center mb-10">My Tech Stacks</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {techStacks.map((stack, index) => (
-            <div key={index} className="card bg-base-200 shadow-lg border border-base-300 p-6">
-              <h3 className="text-xl font-bold mb-6 text-center text-primary uppercase tracking-wider">
-                {stack.category}
-              </h3>
-              <div className="flex flex-wrap gap-4 justify-center">
-                {stack.skills.map((skill, idx) => (
-                  <div key={idx} className="flex flex-col items-center gap-2 hover:scale-105 transition-transform duration-300">
-                    <div className="w-16 h-16 flex items-center justify-center bg-white rounded-xl p-2 shadow-sm">
-                      <img src={skill.icon} alt={skill.name} className="w-full h-full object-contain" />
-                    </div>
-                    <span className="text-xs font-semibold">{skill.name}</span>
-                  </div>
-                ))}
+const About = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  const words = "I am an aspiring Web Developer specializing in building modern web applications. With a primary focus on Frontend Development with React.js, I bridge the gap between design and functionality. I have hands-on experience with the MERN stack and I am now expanding into Next.js and advanced backend concepts.".split(" ");
+
+  return (
+    <section id="about" ref={ref} className="py-28 relative overflow-hidden">
+      <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full blur-3xl opacity-[0.08] pointer-events-none"
+        style={{ background: "radial-gradient(circle, #A78BFA, transparent)" }} />
+
+      <div className="container mx-auto px-6">
+        <SectionTitle label="Who I Am" title="About Me" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+          {/* Image */}
+          <motion.div initial={{ opacity: 0, x: -60 }} animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8 }} className="relative flex justify-center">
+            <div className="relative">
+              {/* Corner decorations */}
+              <div className="absolute -top-5 -left-5 w-28 h-28 rounded-2xl opacity-40 pointer-events-none"
+                style={{ border: "1px solid rgba(124,58,237,0.4)" }} />
+              <div className="absolute -bottom-5 -right-5 w-28 h-28 rounded-2xl opacity-30 pointer-events-none"
+                style={{ border: "1px solid rgba(204,255,0,0.3)" }} />
+
+              <div className="relative w-72 h-80 md:w-80 md:h-[22rem] rounded-2xl overflow-hidden gradient-border">
+                <img src={profile} alt="Ahmed Yeasin" className="w-full h-full object-cover" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(9,9,15,0.5), transparent)" }} />
               </div>
+
+              <motion.div animate={{ y: [-5, 5, -5] }} transition={{ duration: 3, repeat: Infinity }}
+                className="absolute -bottom-5 left-1/2 -translate-x-1/2 glass-card rounded-full px-5 py-2.5 flex items-center gap-2 text-sm font-semibold whitespace-nowrap">
+                <span className="w-2 h-2 rounded-full bg-[#CCFF00] animate-pulse" />
+                Open to Opportunities
+              </motion.div>
             </div>
-          ))}
+          </motion.div>
+
+          {/* Text */}
+          <motion.div initial={{ opacity: 0, x: 60 }} animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.1 }}>
+            <h3 className="text-2xl font-bold text-white mb-6">
+              Passionate about building things for the{" "}
+              <span className="gradient-text">web</span>
+            </h3>
+
+            {/* Word-by-word reveal */}
+            <div className="text-white/55 leading-relaxed mb-8 flex flex-wrap gap-x-1.5">
+              {words.map((word, i) => (
+                <motion.span key={i} initial={{ opacity: 0, y: 8 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.35, delay: 0.3 + i * 0.022 }}
+                  className="inline-block">
+                  {word}
+                </motion.span>
+              ))}
+            </div>
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mb-10">
+              {tags.map((tag, i) => (
+                <motion.span key={tag} initial={{ opacity: 0, scale: 0.8 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ delay: 0.5 + i * 0.05 }}
+                  className="px-3 py-1.5 text-xs font-semibold rounded-lg"
+                  style={{ color: "#A78BFA", background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.22)" }}>
+                  {tag}
+                </motion.span>
+              ))}
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4">
+              {stats.map((stat) => (
+                <div key={stat.label} className="glass-card rounded-2xl p-4 text-center">
+                  <Counter value={stat.value} suffix={stat.suffix} />
+                  <div className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.38)" }}>{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

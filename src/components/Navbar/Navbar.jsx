@@ -1,53 +1,132 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import github from "../../assets/github-logo-png_seeklogo-304612.png";
-import me from "../../assets/AYR.png";
+
+const navLinks = [
+  { href: "#home", label: "Home", id: "home" },
+  { href: "#skills", label: "Skills", id: "skills" },
+  { href: "#about", label: "About", id: "about" },
+  { href: "#projects", label: "Projects", id: "projects" },
+  { href: "#contact", label: "Contact", id: "contact" },
+];
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState("home");
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 30);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const observers = navLinks.map(({ id }) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActive(id); },
+        { threshold: 0.35 }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach((o) => o?.disconnect());
+  }, []);
+
   return (
-    // 'sticky top-0' ebong 'z-50' ekhanei thakte hobe
-    <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-base-100/60 backdrop-blur-md shadow-sm">
-      <div className="navbar container mx-auto px-4">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-              </svg>
-            </div>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-              <li><a href="#home">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
+    <motion.nav
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled ? "backdrop-blur-xl shadow-2xl shadow-black/60" : ""
+      }`}
+      style={{ background: scrolled ? "rgba(9,9,15,0.85)" : "transparent", borderBottom: scrolled ? "1px solid rgba(255,255,255,0.05)" : "none" }}
+    >
+      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <a href="#home" className="flex items-center gap-2.5 group">
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-black text-sm shadow-lg shadow-violet-500/30 group-hover:shadow-violet-500/60 transition-all duration-300"
+            style={{ background: "linear-gradient(135deg, #7C3AED, #A78BFA)" }}>
+            AY
           </div>
-          <a href="#home" className="hidden md:flex items-center gap-2">
-            <img className="h-10 w-auto" src={me} alt="Logo" />
-          </a>
-        </div>
+          <span className="font-bold text-lg text-white/90 group-hover:text-white transition-colors">
+            Ahmed<span style={{ color: "#A78BFA" }}>.</span>
+          </span>
+        </a>
 
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal gap-4 px-1 font-medium">
-             <li><a href="#home" className="hover:text-purple-600">Home</a></li>
-             <li><a href="#about" className="hover:text-purple-600">About</a></li>
-             <li><a href="#projects" className="hover:text-purple-600">Projects</a></li>
-             <li><a href="#contact" className="hover:text-purple-600">Contact</a></li>
-          </ul>
-        </div>
+        {/* Desktop links */}
+        <ul className="hidden md:flex items-center gap-1">
+          {navLinks.map(({ href, label, id }) => {
+            const isActive = active === id;
+            return (
+              <li key={href}>
+                <a
+                  href={href}
+                  className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
+                    isActive ? "text-white" : "text-white/45 hover:text-white/80"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeNav"
+                      className="absolute inset-0 rounded-lg"
+                      style={{ background: "rgba(124,58,237,0.18)", border: "1px solid rgba(124,58,237,0.35)" }}
+                    />
+                  )}
+                  <span className="relative z-10">{label}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
 
-        <div className="navbar-end">
-          <a 
-            href="https://github.com/AhmedYeasin"
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-sm md:btn-md bg-gradient-to-r from-[#632EE3] to-[#9F62F2] border-none text-white"
-          >
-            <img className="h-5 mr-2" src={github} alt="GitHub" />
-            <span className="hidden sm:inline">Contribute</span>
-          </a>
-        </div>
+        {/* GitHub CTA */}
+        <a
+          href="https://github.com/AhmetChatgami"
+          target="_blank"
+          rel="noreferrer"
+          className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white rounded-xl transition-all duration-300 hover:scale-105 active:scale-95"
+          style={{ background: "linear-gradient(135deg, #7C3AED, #A78BFA)", boxShadow: "0 4px 20px rgba(124,58,237,0.25)" }}
+        >
+          <img className="h-4 w-4 invert" src={github} alt="GitHub" />
+          GitHub
+        </a>
+
+        {/* Hamburger */}
+        <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden flex flex-col gap-1.5 w-9 h-9 items-center justify-center" aria-label="Toggle Menu">
+          <motion.span animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7 : 0 }} className="block w-6 h-0.5 bg-white origin-center" />
+          <motion.span animate={{ opacity: menuOpen ? 0 : 1, x: menuOpen ? -10 : 0 }} className="block w-6 h-0.5 bg-white" />
+          <motion.span animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7 : 0 }} className="block w-6 h-0.5 bg-white origin-center" />
+        </button>
       </div>
-    </nav>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            style={{ background: "rgba(9,9,15,0.97)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}
+            className="md:hidden overflow-hidden backdrop-blur-xl"
+          >
+            <ul className="flex flex-col px-6 py-4 gap-1">
+              {navLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <a href={href} onClick={() => setMenuOpen(false)}
+                    className="block px-4 py-3 text-sm font-medium text-white/60 hover:text-white rounded-xl hover:bg-white/5 transition-all duration-200">
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 

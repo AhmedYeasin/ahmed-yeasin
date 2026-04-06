@@ -1,40 +1,47 @@
 import "./App.css";
+import "./index.css";
+import React, { useEffect } from "react";
+import Lenis from "lenis";
+import CustomCursor from "./components/CustomCursor/CustomCursor";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
+import Skills from "./components/Skills/Skills";
 import About from "./components/About/About";
-import Projects from "./components/Projects/Projects";
+import Project from "./components/Projects/Projects";
 import Contact from "./components/Contact/Contact";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
 import Footer from "./components/Footer/Footer";
 
-function App() {
+export default function App() {
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: false,
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
     });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    return () => lenis.destroy();
   }, []);
 
   return (
     <>
-      <Navbar></Navbar>
-      <section id="home">
+      <CustomCursor />
+      <main className="w-full relative" style={{ background: "#09090f", color: "#f0f0f8" }}>
+        <Navbar />
         <Home />
-      </section>
-      <section id="about">
+        <Skills />
         <About />
-      </section>
-      <section id="projects">
-        <Projects />
-      </section>
-      <section id="contact">
+        <Project />
         <Contact />
-      </section>
-      <section><Footer></Footer></section>
+        <Footer />
+      </main>
     </>
   );
 }
-
-export default App;
