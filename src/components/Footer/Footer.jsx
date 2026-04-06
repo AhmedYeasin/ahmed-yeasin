@@ -86,7 +86,7 @@ const Footer = () => {
               <span style={{ color: "rgba(255,255,255,0.35)" }}>const</span>{" "}
               <span style={{ color: "#CCFF00" }}>passion</span>{" "}
               <span style={{ color: "rgba(255,255,255,0.35)" }}>=</span>{" "}
-              <span style={{ color: "#A78BFA" }}>"building great UIs"</span>;
+              <span style={{ color: "#A78BFA" }}>"building lovely pages suites to you &lt;3"</span>;
             </div>
           </div>
         </div>

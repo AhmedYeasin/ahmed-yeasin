@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import { FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { HiPaperAirplane } from "react-icons/hi2";
 import Swal from "sweetalert2";
@@ -10,9 +10,10 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 
 const socials = [
   { href: "https://github.com/AhmetChatgami", icon: <FaGithub />, label: "GitHub" },
-  { href: "https://www.linkedin.com/", icon: <FaLinkedin />, label: "LinkedIn" },
-  { href: "https://x.com/", icon: <FaXTwitter />, label: "Twitter" },
-  { href: "https://facebook.com", icon: <FaFacebook />, label: "Facebook" },
+  { href: "https://www.linkedin.com/in/ahmed-yeasin-ramadan", icon: <FaLinkedin />, label: "LinkedIn" },
+  { href: "https://x.com/YeasinRamadan", icon: <FaXTwitter />, label: "Twitter" },
+  { href: "https://www.facebook.com/profile.php?id=100009262337765", icon: <FaFacebook />, label: "Facebook" },
+  { href: "https://www.instagram.com/ahmet.yeasin.ramazan", icon: <FaInstagram />, label: "Instagram" },
 ];
 
 const inputClass = "w-full rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none transition-all duration-300";

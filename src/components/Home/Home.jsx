@@ -5,7 +5,7 @@ import { FaArrowDown } from "react-icons/fa6";
 import profile from "../../assets/ahmed.jpeg.jpg";
 import cvFile from "../../../public/Resume Template.pdf";
 
-const roles = ["Web Developer", "React Specialist", "MERN Stack Developer", "UI Enthusiast"];
+const roles = ["Frontend Focused-Web Developer", "React.js Developer", "JavaScript Enthusiast", "Next.js Learner"];
 
 const Home = () => {
   const [roleIndex, setRoleIndex] = useState(0);
